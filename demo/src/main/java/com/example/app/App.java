@@ -8,7 +8,7 @@ public class App extends Application {
 
 
     public void start(Stage stage) {
-
+        // HEllo
         Model.getInstance().getViewFactory().showLoginWindow();
     }
 
