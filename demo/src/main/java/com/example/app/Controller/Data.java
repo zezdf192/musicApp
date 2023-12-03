@@ -1,6 +1,7 @@
 package com.example.app.Controller;
 
 import com.example.app.Controller.Song.ListSongPlaying;
+import com.example.app.Models.PlaylistItem;
 import com.example.app.Models.Song;
 import com.example.app.Models.SongItemHome;
 
@@ -16,15 +17,11 @@ public class Data {
     private Song currentSong;
 
 
-
     public Data() {
         volumeValue = 0.5;
         currentSong = new Song();
 
     }
-
-
-
 
 
 

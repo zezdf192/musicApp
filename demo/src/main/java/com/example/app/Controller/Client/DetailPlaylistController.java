@@ -22,7 +22,7 @@ public class DetailPlaylistController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       // songItemHomes();
+
         List<Song> listsongs = ListSongPlaying.SongListGlobal.songList.getListSongs();
 
         for (int i = 0; i< listsongs.size(); i++) {
@@ -42,25 +42,5 @@ public class DetailPlaylistController implements Initializable {
             }
         }
     }
-
-//    private void songItemHomes() {
-//
-//        Song song1 = new Song( "Waybachome", "Charty Puth", "1", "SongEnglish", "19/12",
-//                "4:40", "https://res.cloudinary.com/djfpcyyfe/video/upload/v1694846628/qui3zo66giorp5w3taa9.mp3",
-//                "");
-//
-//        Song song2 = new Song( "Je je je", "Son TUng", "1", "SongEnglish", "19/12",
-//                "4:40", "https://res.cloudinary.com/djfpcyyfe/video/upload/v1688831501/wmmyer0h3fyvrxo4snxm.mp3",
-//                "");
-//
-//        Song song3 = new Song( "TUng tung tun", "Raider", "1", "SongEnglish", "19/12",
-//                "4:40", "https://res.cloudinary.com/djfpcyyfe/video/upload/v1688830887/vvsyumecp0d9emoqwpqn.mp3",
-//                "","","","");
-//
-//
-//        ListSongPlaying.SongListGlobal.songList.addSong(song1);
-//        ListSongPlaying.SongListGlobal.songList.addSong(song2);
-//        ListSongPlaying.SongListGlobal.songList.addSong(song3);
-//    }
 
 }

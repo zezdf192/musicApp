@@ -2,8 +2,12 @@ package com.example.app.Controller;
 
 import com.example.app.ConnectDB.ConnectDB;
 import com.example.app.Controller.Client.BottomClientController;
+import com.example.app.Controller.Client.ListPlayList;
 import com.example.app.Controller.Song.HandleSong;
+import com.example.app.Controller.Song.ListSongPlaying;
 import com.example.app.Models.Model;
+import com.example.app.Models.PlaylistItem;
+import com.example.app.Models.Song;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -25,6 +29,15 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         login_btn.setOnAction(event -> onLogin());
         change_signup.setOnAction(actionEvent -> change_signup());
+
+        PlaylistItem PlaylistItem1 = new PlaylistItem("Thiên Nhiên", "Những thanh âm giai điệu thiên nhiên...");
+        PlaylistItem PlaylistItem2 = new PlaylistItem("Thiên Nhiên", "Những thanh âm giai điệu thiên nhiên...");
+        // ... (create other PlaylistItems)
+
+        ListPlayList.ListPlayListGlobal.songList.addListPlayList(PlaylistItem1);
+        ListPlayList.ListPlayListGlobal.songList.addListPlayList(PlaylistItem2);
+        addSongByDatabase();
+
     }
 
     private void onLogin() {
@@ -95,5 +108,32 @@ public class LoginController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    public void addSongByDatabase() {
+        ListSongPlaying.SongListGlobal.songList.removeListSong();
+
+        try{
+            Connection connection = ConnectDB.getConnection();
+            String query = "select * from song join user on song.authorId = user.userId";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                String nameSong = resultSet.getString("nameSong");
+                String nameAuthor = resultSet.getString("nameUser");
+                String dateCreated =  resultSet.getString("dateCreated");
+                String totalLike =  resultSet.getString("totalLike");
+                String pathSong =  resultSet.getString("pathSong");
+                String pathImg =  resultSet.getString("pathImg");
+                String kindOfSong =  resultSet.getString("kindOfSong");
+                Song song = new Song(nameSong, nameAuthor, dateCreated, totalLike, pathSong, pathImg, kindOfSong);
+                ListSongPlaying.SongListGlobal.songList.addSong(song);
+            }
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -24,7 +24,8 @@ public class ClientController implements Initializable {
                 case PLAY_LIST ->     client_parent.setCenter(Model.getInstance().getViewFactory().getPlaylistView());
                 case BOTTOM_VIEW -> client_parent.setBottom(Model.getInstance().getViewFactory().getBottomView());
                 case DIV -> client_parent.setBottom(Model.getInstance().getViewFactory().getDivView());
-                default ->     client_parent.setCenter(Model.getInstance().getViewFactory().getHomeView());
+                case HOME -> client_parent.setCenter(Model.getInstance().getViewFactory().getHomeView());
+                default -> System.out.println("Hi");
 
             }
         }));

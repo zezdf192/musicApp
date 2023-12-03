@@ -33,92 +33,14 @@ import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
 
-
-    public AnchorPane list_box;
-
-    public HBox playlist_item_layout;
-
-    private List<PlaylistItem> listPlaylist_Item = new ArrayList<>();
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //addSongByDatabase();
-        list_box.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                //Đặt lại Playlist
 
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
 
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/Fxml/Client/DetailPlaylist.fxml"));
+        //addSongByDatabase();
 
-                Parent viewBottomClient;
-                try {
-                    viewBottomClient = loader.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
 
-                // Set the new BottomClient as the bottom of the BorderPane
-                borderPane.setCenter(viewBottomClient);
-            }
-        });
-
-        playList_Item_Layout();
-
-        for (int i = 0; i < listPlaylist_Item.size(); i++) {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/Fxml/Client/PlaylistView/PlaylistItem.fxml"));
-            try {
-                AnchorPane hBox = fxmlLoader.load();
-                PlaylistItemController cic = fxmlLoader.getController();
-                cic.setData(listPlaylist_Item.get(i));
-                playlist_item_layout.getChildren().add(hBox);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
     }
-
-
-    private void playList_Item_Layout() {
-        PlaylistItem PlaylistItem1 = new PlaylistItem("Thttps://res.cloudinary.com/djfpcyyfe/image/upload/v1701314435/duowpfnj15mfzcbesxsc.jpg", "Thiên Nhiên", "Những thanh âm giai điệu thiên nhiên...");
-        PlaylistItem PlaylistItem2 = new PlaylistItem("Thttps://res.cloudinary.com/djfpcyyfe/image/upload/v1701314435/duowpfnj15mfzcbesxsc.jpg", "Thiên Nhiên", "Những thanh âm giai điệu thiên nhiên...");
-        // ... (create other PlaylistItems)
-
-        listPlaylist_Item.add(PlaylistItem1);
-        listPlaylist_Item.add(PlaylistItem2);
-        // ... (add other PlaylistItems)
-    }
-
-    public void addSongByDatabase() {
-        ListSongPlaying.SongListGlobal.songList.removeListSong();
-
-        try{
-            Connection connection = ConnectDB.getConnection();
-            String query = "select * from song join user on song.authorId = user.userId";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-
-            while (resultSet.next()) {
-                 String nameSong = resultSet.getString("nameSong");
-                 String nameAuthor = resultSet.getString("nameUser");
-                 String dateCreated =  resultSet.getString("dateCreated");
-                 String totalLike =  resultSet.getString("totalLike");
-                 String pathSong =  resultSet.getString("pathSong");
-                 String pathImg =  resultSet.getString("pathImg");
-                 String kindOfSong =  resultSet.getString("kindOfSong");
-                 Song song = new Song(nameSong, nameAuthor, dateCreated, totalLike, pathSong, pathImg, kindOfSong);
-                 ListSongPlaying.SongListGlobal.songList.addSong(song);
-            }
-
-
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 
 }

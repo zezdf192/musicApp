@@ -33,13 +33,30 @@ public class ClientMenuController implements Initializable {
     private void addListener () {
         home_btn.setOnAction(event -> onHome(event));
         search_btn.setOnAction(event -> onSearch(event));
-        collection_btn.setOnAction(event -> onCollection());
-        mymusic_btn.setOnAction(event -> onMyMusic());
-        playlist_btn.setOnAction(event -> onPlaylist());
+        collection_btn.setOnAction(event -> onCollection(event));
+        mymusic_btn.setOnAction(event -> onMyMusic(event));
+        playlist_btn.setOnAction(event -> onPlaylist(event));
 
     }
 
     private void onHome (ActionEvent event) {
+        //Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.SEARCH);
+
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
+//
+//        // Load a new instance of BottomClient
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(getClass().getResource("/Fxml/Client/HomeView/Home.fxml"));
+//        Parent viewBottomClient;
+//        try {
+//            viewBottomClient = loader.load();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        borderPane.setCenter(viewBottomClient);
+
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.HOME);
     }
 
@@ -60,18 +77,60 @@ public class ClientMenuController implements Initializable {
         }
 
         borderPane.setCenter(viewBottomClient);
-        //Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.SEARCH);
+//        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.SEARCH);
     }
 
-    private void onCollection() {
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.COLLECTION);
+    private void onCollection(ActionEvent event) {
+        //Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.COLLECTION);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
+
+        // Load a new instance of BottomClient
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Fxml/Client/Collection.fxml"));
+        Parent viewBottomClient;
+        try {
+            viewBottomClient = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        borderPane.setCenter(viewBottomClient);
     }
 
-    private void onPlaylist() {
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.PLAY_LIST);
+    private void onPlaylist(ActionEvent event) {
+        //Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.PLAY_LIST);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
+
+        // Load a new instance of BottomClient
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Fxml/Client/PlayList.fxml"));
+        Parent viewBottomClient;
+        try {
+            viewBottomClient = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        borderPane.setCenter(viewBottomClient);
     }
 
-    private void onMyMusic() {
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.MY_MUSIC);
+    private void onMyMusic(ActionEvent event) {
+        //Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.MY_MUSIC);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
+
+        // Load a new instance of BottomClient
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Fxml/Client/MyMusic.fxml"));
+        Parent viewBottomClient;
+        try {
+            viewBottomClient = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        borderPane.setCenter(viewBottomClient);
     }
 }
