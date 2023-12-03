@@ -6,13 +6,14 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class ViewFactory {
     Scene scene = null;
     // Star Client
     private final ObjectProperty<ClientMenuOptions> clientSelectedMenuItem;
-    private AnchorPane homeView;
+    private BorderPane homeView;
     private AnchorPane searchView;
     private AnchorPane collectionView;
     private AnchorPane myMusicView;
@@ -36,15 +37,15 @@ public class ViewFactory {
     public ObjectProperty<ClientMenuOptions> getClientSelectedMenuItem() {
         return clientSelectedMenuItem;
     }
-    public AnchorPane getHomeView() {
+    public BorderPane getHomeView() {
         if (homeView == null) {
             try {
-                homeView = new FXMLLoader(getClass().getResource("/Fxml/Client/Home.fxml")).load();
+                homeView = new FXMLLoader(getClass().getResource("/Fxml/Client/HomeView/Home.fxml")).load();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return homeView;
+        return  homeView;
     }
 
     public AnchorPane getSearchView() {

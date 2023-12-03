@@ -15,6 +15,7 @@ module com.example.demo {
     exports com.example.app.Controller.Song;
     exports com.example.app.Controller.Admin;
     exports com.example.app.Controller.Client;
+    exports com.example.app.Controller.Client.Home;
     exports com.example.app.Models;
     exports com.example.app.Views;
 }

@@ -13,7 +13,7 @@
         <children>
             <ImageView fitHeight="141.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="false">
                 <image>
-                    <Image fx:id="url_Img" url="@../../../images/pexels-alfons-landsmann-19200684.jpg" />
+                    <Image  url="@../../../images/pexels-alfons-landsmann-19200684.jpg" />
                 </image>
                 <cursor>
                     <Cursor fx:constant="HAND" />
