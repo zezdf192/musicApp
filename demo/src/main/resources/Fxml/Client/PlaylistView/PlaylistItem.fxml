@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="217.0" prefWidth="132.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.Controller.Client.PlaylistItemController">
+    <AnchorPane layoutX="6.0" layoutY="7.0" prefHeight="217.0" prefWidth="132.0" styleClass="img_item_playlist" stylesheets="@../../../Styles/page.css">
+        <children>
+            <ImageView fitHeight="141.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="false">
+                <image>
+                    <Image fx:id="url_Img" url="@../../../images/pexels-alfons-landsmann-19200684.jpg" />
+                </image>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </ImageView>
+            <Label fx:id="namePlaylist" layoutX="14.0" layoutY="148.0" style="-fx-font-weight: 700;" text="Thiên nhiên" />
+            <Text fx:id="des_Playlist" layoutX="11.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-translate-x: 4px;" text="Những âm thanh giai điệu thiên nhiên..." wrappingWidth="117.8067855834961" />
+        </children>
+        <effect>
+            <DropShadow />
+        </effect>
+    </AnchorPane>
+</AnchorPane>
