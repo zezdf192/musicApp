@@ -5,6 +5,7 @@ import com.example.app.Controller.Song.ListSongPlaying;
 import com.example.app.Models.Song;
 import com.example.app.Models.SongItemHome;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
 
 import javafx.fxml.Initializable;
@@ -15,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javafx.util.Duration;
@@ -31,11 +33,12 @@ public class BottomClientController implements Initializable {
     public Label nameSong;
     public ProgressBar progress_song;
     public Label time_end;
-    public Label play_btn;
     public Text time_start;
     public AnchorPane nameSongContainer;
     public ProgressBar volume_song;
     public Label nameUser;
+    public FontAwesomeIconView likeSong;
+    public FontAwesomeIconView play_btn;
 
     private boolean playing = true;
     private boolean isRepeat = false;
@@ -47,6 +50,7 @@ public class BottomClientController implements Initializable {
         playSong();
         volume_song.setProgress(Data.getDataGLobal.dataGlobal.getVolumeValue());
         addListener();
+        likeSong.addEventHandler(MouseEvent.MOUSE_CLICKED, this::handleLikePlaylistClicked);
     }
 
     protected void addListener() {
@@ -137,7 +141,6 @@ public class BottomClientController implements Initializable {
             try {
                 mediaPlayer.stop();
                 mediaPlayer.dispose();
-
             } catch (Exception e) {
                 // Handle exceptions if necessary
             }
@@ -216,4 +219,17 @@ public class BottomClientController implements Initializable {
         return String.format("%02d:%02d", minutes, seconds);
     }
 
+    private void handleLikePlaylistClicked(MouseEvent event) {
+        // Xử lý sự kiện khi biểu tượng trái tim được bấm
+        Color newColor = Color.web("#7230e4");
+        if (likeSong.getFill().equals(Color.WHITE)) {
+            // Nếu trạng thái hiện tại là trắng, đổi màu sang xanh
+            likeSong.setFill(newColor);
+        } else {
+            // Nếu trạng thái hiện tại không phải là trắng, đổi về trắng
+            likeSong.setFill(Color.WHITE);
+        }
+
+        // Thêm các hành động khác sau khi nhấn vào biểu tượng trái tim (nếu cần)
+    }
 }

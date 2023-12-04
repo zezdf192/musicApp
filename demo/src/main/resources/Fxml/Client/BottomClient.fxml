@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
@@ -17,14 +19,17 @@
     <ProgressBar fx:id="progress_song" layoutX="408.0" layoutY="64.0" prefHeight="8.0" prefWidth="394.0" progress="0.0" />
     <Label fx:id="time_end" layoutX="824.0" layoutY="58.0" text="0:00" />
     <ProgressBar fx:id="volume_song" layoutX="1011.0" layoutY="42.0" prefHeight="8.0" prefWidth="133.0" progress="0.5" />
-    <Label layoutX="293.0" layoutY="58.0" text="&lt;3" />
     <Label layoutX="486.0" layoutY="22.0" text="&lt;&gt;" />
-    <Label layoutX="541.0" layoutY="23.0" text="|&lt;" />
-    <Label fx:id="play_btn" layoutX="602.0" layoutY="23.0" text="||" />
-    <Label layoutX="658.0" layoutY="23.0" text="&gt;|" />
+    <Label layoutX="541.0" layoutY="17.0" style="-fx-font-size: 18px; -fx-font-weight: 700;" text="|&lt;" />
+    <Label layoutX="653.0" layoutY="17.0" style="-fx-font-size: 18px; -fx-font-weight: 700;" text="&gt;|" />
     <Label layoutX="703.0" layoutY="22.0" text="--" />
     <Label layoutX="925.0" layoutY="38.0" text="P" />
-    <Label layoutX="967.0" layoutY="38.0" text="Vo" />
     <Text fx:id="time_start" layoutX="368.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0:00" />
+   <FontAwesomeIconView fx:id="likeSong" fill="WHITE" glyphName="HEART" layoutX="282.0" layoutY="59.0" size="18.0">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor></FontAwesomeIconView>
+   <FontAwesomeIconView glyphName="VOLUME_UP" layoutX="971.0" layoutY="52.0" size="18.0" />
+   <FontAwesomeIconView fx:id="play_btn" glyphName="PAUSE" layoutX="598.0" layoutY="38.0" size="18.0" />
 
 </AnchorPane>
