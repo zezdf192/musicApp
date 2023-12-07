@@ -23,6 +23,12 @@ public class LoginController implements Initializable {
     public PasswordField password_field;
     public TextField email_field;
 
+    private static User user; // Đặt làm biến toàn cục
+
+    public static User getUser() {
+        return user;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         login_btn.setOnAction(actionEvent -> {
@@ -61,12 +67,14 @@ public class LoginController implements Initializable {
                         String userEmail = resultSet.getString("email");
                         String userGender = resultSet.getString("gender");
 
-                        User user = new User();
-
+//                        User user = new User(userName, userId, userEmail,userGender);
+                        user = new User();
                         user.setUserName(userName);
                         user.setUserEmail(userEmail);
                         user.setUserGender(userGender);
                         user.setUserId(userId);
+
+//                        Data.getDataGLobal.dataGlobal.setCurrentUser(user);
                     }
                 }
             } catch (SQLException e) {

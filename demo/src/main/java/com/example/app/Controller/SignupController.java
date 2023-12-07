@@ -28,6 +28,12 @@ public class SignupController implements Initializable {
     public Button submit_signup;
     public Button change_login;
 
+    private static User user; // Đặt làm biến toàn cục
+
+    public static User getUser() {
+        return user;
+    }
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         submit_signup.setOnAction(event -> onSignup());
@@ -95,7 +101,7 @@ public class SignupController implements Initializable {
                                     String userEmail = resultSet.getString("email");
                                     String userGender = resultSet.getString("gender");
 
-                                    User user = new User();
+                                    user = new User();
 
                                     user.setUserName(nameUser);
                                     user.setUserEmail(userEmail);
