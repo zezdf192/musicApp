@@ -1,8 +1,4 @@
-package com.example.app.Controller.Client;
-
-import com.example.app.Controller.Song.ListSongPlaying;
-import com.example.app.Models.PlaylistItem;
-import com.example.app.Models.Song;
+package com.example.app.Models.Playlist;
 
 import java.util.ArrayList;
 import java.util.List;

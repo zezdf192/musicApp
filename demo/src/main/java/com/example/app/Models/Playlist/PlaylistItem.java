@@ -1,4 +1,4 @@
-package com.example.app.Models;
+package com.example.app.Models.Playlist;
 
 public class PlaylistItem {
     //String urlImage;

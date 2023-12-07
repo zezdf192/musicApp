@@ -1,9 +1,7 @@
 package com.example.app.Controller.Client;
 
-import com.example.app.Controller.Data;
-import com.example.app.Controller.Song.ListSongPlaying;
-import com.example.app.Models.Song;
-import com.example.app.Models.SongItemHome;
+import com.example.app.Models.Song.ListSongPlaying;
+import com.example.app.Models.Song.Song;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,7 +10,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 

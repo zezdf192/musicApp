@@ -1,9 +1,8 @@
 package com.example.app.Controller.Client;
 
 import com.example.app.Controller.Data;
-import com.example.app.Controller.Song.ListSongPlaying;
-import com.example.app.Models.Song;
-import com.example.app.Models.SongItemHome;
+import com.example.app.Models.Song.ListSongPlaying;
+import com.example.app.Models.Song.Song;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.EventHandler;
@@ -24,7 +23,6 @@ import javafx.util.Duration;
 import java.net.URI;
 import java.net.URL;
 
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class BottomClientController implements Initializable {

@@ -15,7 +15,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
             <ImageView fitHeight="59.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="false">
-                <Image url="@../../../images/sonic2.png" />
+<!--                <Image url="@../../../images/sonic2.png" />-->
             </ImageView>
             <Label layoutX="72.0" layoutY="21.0" style="-fx-font-size: 14px;" styleClass="item_playlist" stylesheets="@../../../Styles/page.css" text="Danh sách phát nhạc của tôi" />
         </AnchorPane>
@@ -23,7 +23,7 @@
             <children>
                 <ImageView fitHeight="59.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="false">
                     <image>
-                        <Image url="@../../../images/pexels-ahmet-öktem-19211825.jpg" />
+<!--                        <Image url="@../../../images/pexels-ahmet-öktem-19211825.jpg" />-->
                     </image>
                 </ImageView>
                 <Label layoutX="72.0" layoutY="21.0" prefHeight="20.0" prefWidth="202.0" style="-fx-font-size: 14px;" styleClass="item_playlist" stylesheets="@../../../Styles/page.css" text="Danh sách phát nhạc của tôi" />
@@ -38,7 +38,7 @@
             </cursor>
             <ImageView fitHeight="59.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="false">
                 <image>
-                    <Image url="@../../../images/mtp.jpg" />
+<!--                    <Image url="@../../../images/mtp.jpg" />-->
                 </image>
             </ImageView>
             <Label layoutX="72.0" layoutY="21.0" style="-fx-font-size: 14px;" styleClass="item_playlist" stylesheets="@../../../Styles/page.css" text="Sơn Tùng M-TP" />

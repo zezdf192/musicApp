@@ -2,31 +2,23 @@ package com.example.app.Controller.Client;
 
 
 import com.example.app.Controller.Data;
-import com.example.app.Controller.Song.ListSongPlaying;
-import com.example.app.Models.Model;
-import com.example.app.Models.Song;
-import com.example.app.Models.SongItemHome;
-import com.example.app.Views.ClientMenuOptions;
-import javafx.collections.ObservableList;
+import com.example.app.Models.Song.ListSongPlaying;
+import com.example.app.Models.Song.Song;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class SongItemController extends BottomClientController  implements Initializable {

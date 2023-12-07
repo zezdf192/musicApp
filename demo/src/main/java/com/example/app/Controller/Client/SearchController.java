@@ -1,12 +1,8 @@
 package com.example.app.Controller.Client;
 
 import com.example.app.ConnectDB.ConnectDB;
-import com.example.app.Controller.Data;
-import com.example.app.Controller.Song.ListSongPlaying;
-import com.example.app.Models.Song;
-import javafx.animation.KeyFrame;
+import com.example.app.Models.Song.Song;
 import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

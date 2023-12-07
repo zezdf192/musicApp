@@ -1,14 +1,12 @@
 package com.example.app.Controller;
 
 import com.example.app.ConnectDB.ConnectDB;
-import com.example.app.Controller.Client.BottomClientController;
-import com.example.app.Controller.Client.ListPlayList;
-import com.example.app.Controller.Song.HandleSong;
-import com.example.app.Controller.Song.ListSongPlaying;
+import com.example.app.Models.Playlist.ListPlayList;
+import com.example.app.Models.Song.ListSongPlaying;
 import com.example.app.Models.Model;
-import com.example.app.Models.PlaylistItem;
-import com.example.app.Models.Song;
-import javafx.collections.FXCollections;
+import com.example.app.Models.Playlist.PlaylistItem;
+import com.example.app.Models.Song.Song;
+import com.example.app.Models.User.User;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -27,43 +25,57 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        login_btn.setOnAction(event -> onLogin());
+        login_btn.setOnAction(actionEvent -> {
+            try {
+                onLogin();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
         change_signup.setOnAction(actionEvent -> change_signup());
 
-        PlaylistItem PlaylistItem1 = new PlaylistItem("Thiên Nhiên", "Những thanh âm giai điệu thiên nhiên...");
-        PlaylistItem PlaylistItem2 = new PlaylistItem("Thiên Nhiên", "Những thanh âm giai điệu thiên nhiên...");
-        // ... (create other PlaylistItems)
-
-        ListPlayList.ListPlayListGlobal.songList.addListPlayList(PlaylistItem1);
-        ListPlayList.ListPlayListGlobal.songList.addListPlayList(PlaylistItem2);
-        addSongByDatabase();
+//        addSongByDatabase();
 
     }
 
-    private void onLogin() {
-//        try{
-////            Connection connection = ConnectDB.getConnection();
-////            String query = "select * from songs";
-////            Statement statement = connection.createStatement();
-////            ResultSet resultSet = statement.executeQuery(query);
-////            while (resultSet.next()) {
-////                System.out.println("songID " + resultSet.getString("songID"));
-////                System.out.println("PathSOng" + resultSet.getString("pathSong"));
-//            }
-//
-//
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    private void onLogin() throws SQLException {
 
         String email = email_field.getText();
         String password = password_field.getText();
-//
-//        if (email.isEmpty() || password.isEmpty()) {
-//            showAlert("Lỗi", "Vui lòng nhập email và mật khẩu!", Alert.AlertType.ERROR);
-//            return;
-//        }
-        //Connection connection = ConnectDB.getConnection()
+
+        if (email.isEmpty() || password.isEmpty()) {
+            showAlert("Lỗi", "Vui lòng nhập email và mật khẩu!", Alert.AlertType.ERROR);
+            return;
+        }
+        Connection connection = ConnectDB.getConnection();
+
+        try (connection) {
+            String sql = "SELECT * FROM user where email = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, email);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        String userName = resultSet.getString("nameUser");
+                        Integer userId = resultSet.getInt("userId");
+                        String userEmail = resultSet.getString("email");
+                        String userGender = resultSet.getString("gender");
+
+                        User user = new User();
+
+                        user.setUserName(userName);
+                        user.setUserEmail(userEmail);
+                        user.setUserGender(userGender);
+                        user.setUserId(userId);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle the exception appropriately
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         try  {
 
             //validateLogin(email, password, connection

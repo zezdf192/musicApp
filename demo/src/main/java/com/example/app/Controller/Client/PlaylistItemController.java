@@ -1,10 +1,8 @@
 package com.example.app.Controller.Client;
 
-import com.example.app.Controller.Data;
-import com.example.app.Models.PlaylistItem;
+import com.example.app.Models.Playlist.PlaylistItem;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 
 import java.net.URL;

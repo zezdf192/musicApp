@@ -1,13 +1,6 @@
 package com.example.app.Controller;
 
-import com.example.app.Controller.Song.ListSongPlaying;
-import com.example.app.Models.PlaylistItem;
-import com.example.app.Models.Song;
-import com.example.app.Models.SongItemHome;
-
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.List;
+import com.example.app.Models.Song.Song;
 
 public class Data {
     private String nameUser;

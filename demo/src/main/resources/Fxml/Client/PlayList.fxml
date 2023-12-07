@@ -15,14 +15,14 @@
           <Text layoutX="66.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 18px; -fx-font-weight: 700;" text="Danh sách phát của bạn" />
          <Label layoutX="76.0" layoutY="117.0" style="-fx-font-size: 16px;" text="Tên danh sách phát" />
          <TextField layoutX="231.0" layoutY="117.0" prefHeight="26.0" prefWidth="201.0" />
-         <Button layoutX="506.0" layoutY="110.0" mnemonicParsing="false" style="-fx-background-color: #6DB9EF; -fx-text-fill: #ffffff;" styleClass="icon_text" stylesheets="@../../Styles/page.css" text="Tạo">
+         <Button layoutX="486.0" layoutY="115.0" mnemonicParsing="false" style="-fx-background-color: #6DB9EF; -fx-text-fill: #ffffff;" styleClass="icon_text-sm" stylesheets="@../../Styles/page.css" text="Tạo">
             <graphic>
                <FontAwesomeIconView glyphName="PLUS" text="" />
             </graphic>
          </Button>
          <ScrollPane layoutX="61.0" layoutY="227.0" prefHeight="250.0" prefWidth="821.0">
             <content>
-               <HBox prefHeight="238.0" prefWidth="479.0">
+               <HBox prefHeight="238.0" prefWidth="810.0">
                   <children>
                      <AnchorPane prefHeight="238.0" prefWidth="154.0" />
                   </children>

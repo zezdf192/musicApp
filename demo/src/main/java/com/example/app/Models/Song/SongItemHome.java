@@ -1,4 +1,4 @@
-package com.example.app.Models;
+package com.example.app.Models.Song;
 
 public class SongItemHome {
     String nameSong;

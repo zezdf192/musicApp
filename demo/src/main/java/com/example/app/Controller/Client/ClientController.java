@@ -1,11 +1,8 @@
 package com.example.app.Controller.Client;
 
-import com.example.app.Controller.Song.HandleSong;
-import com.example.app.Controller.Song.ListSongPlaying;
 import com.example.app.Models.Model;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
