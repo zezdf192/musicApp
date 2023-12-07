@@ -1,10 +1,15 @@
 package com.example.app.Controller.Client;
 
 import com.example.app.ConnectDB.ConnectDB;
+
 import com.example.app.Controller.Data;
 import com.example.app.Controller.LoginController;
 import com.example.app.Controller.SignupController;
 import com.example.app.Models.Playlist.CurrentPlaylist;
+
+import com.example.app.Controller.LoginController;
+import com.example.app.Controller.SignupController;
+
 import com.example.app.Models.Song.ListSongPlaying;
 import com.example.app.Models.Song.Song;
 import com.example.app.Models.User.User;
@@ -17,6 +22,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -33,20 +41,24 @@ public class DetailPlaylistController implements Initializable {
     public VBox vbox_layout;
     public FontAwesomeIconView like_Playlist;
     public Label des_likePlaylist;
+
     public Label namePlaylist;
     public ImageView img;
     public Label category;
+
 
     private User user;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         CurrentPlaylist currentPlaylist = Data.getDataGLobal.dataGlobal.getCurrentPlaylist();
 
         namePlaylist.setText(currentPlaylist.getNamePlaylist());
         category.setText(currentPlaylist.getCategory());
         Image image = new Image(currentPlaylist.getThumbnailPlaylist());
         img.setImage(image);
+
 
 
 
@@ -107,4 +119,8 @@ public class DetailPlaylistController implements Initializable {
         }
         // Additional actions after clicking the heart icon can be added here
     }
+
 }
+
+
+

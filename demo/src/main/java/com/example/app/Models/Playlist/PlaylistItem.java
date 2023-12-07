@@ -1,6 +1,7 @@
 package com.example.app.Models.Playlist;
 
 public class PlaylistItem {
+
     int playlistId;
     String thumbnailPlaylist;
     String category;
@@ -12,9 +13,15 @@ public class PlaylistItem {
     //String urlImage;
 
 
+    //String urlImage;
+
+    String desPlaylist;
+
+
     public PlaylistItem() {
         // Default constructor
     }
+
 
     public PlaylistItem(int playlistId, String thumbnailPlaylist, String category, String namePlaylist, int authorId, int quantitySong, String description) {
         this.playlistId = playlistId;
@@ -45,9 +52,20 @@ public class PlaylistItem {
         return category;
     }
 
+
+    public PlaylistItem( String namePlaylist, String desPlaylist) {
+       // this.urlImage = urlImage;
+        this.namePlaylist = namePlaylist;
+        this.desPlaylist = desPlaylist;
+    }
+
+
+
+
     public String getNamePlaylist() {
         return namePlaylist;
     }
+
 
     public int getAuthorId() {
         return authorId;
@@ -59,5 +77,9 @@ public class PlaylistItem {
 
     public String getDescription() {
         return description;
+    }
+    public String getDesPlaylist() {
+        return desPlaylist;
+
     }
 }

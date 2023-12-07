@@ -14,18 +14,32 @@
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
+
 <!--            <ImageView fitHeight="59.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="false">-->
 <!--                <Image url="@../../../images/sonic2.png" />-->
 <!--            </ImageView>-->
+
+            <ImageView fitHeight="59.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="false">
+<!--                <Image url="@../../../images/sonic2.png" />-->
+            </ImageView>
+
             <Label layoutX="72.0" layoutY="21.0" style="-fx-font-size: 14px;" styleClass="item_playlist" stylesheets="@../../../Styles/page.css" text="Danh sách phát nhạc của tôi" />
         </AnchorPane>
         <AnchorPane layoutX="371.0" layoutY="114.0" prefHeight="59.0" prefWidth="255.0" styleClass="item_playlist" stylesheets="@../../../Styles/page.css">
             <children>
+
 <!--                <ImageView fitHeight="59.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="false">-->
 <!--                    <image>-->
 <!--                        <Image url="@../../../images/pexels-ahmet-öktem-19211825.jpg" />-->
 <!--                    </image>-->
 <!--                </ImageView>-->
+
+                <ImageView fitHeight="59.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="false">
+                    <image>
+<!--                        <Image url="@../../../images/pexels-ahmet-öktem-19211825.jpg" />-->
+                    </image>
+                </ImageView>
+
                 <Label layoutX="72.0" layoutY="21.0" prefHeight="20.0" prefWidth="202.0" style="-fx-font-size: 14px;" styleClass="item_playlist" stylesheets="@../../../Styles/page.css" text="Danh sách phát nhạc của tôi" />
             </children>
             <cursor>
@@ -36,11 +50,19 @@
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
+
 <!--            <ImageView fitHeight="59.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="false">-->
 <!--                <image>-->
 <!--                    <Image url="@../../../images/mtp.jpg" />-->
 <!--                </image>-->
 <!--            </ImageView>-->
+
+            <ImageView fitHeight="59.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="false">
+                <image>
+<!--                    <Image url="@../../../images/mtp.jpg" />-->
+                </image>
+            </ImageView>
+
             <Label layoutX="72.0" layoutY="21.0" style="-fx-font-size: 14px;" styleClass="item_playlist" stylesheets="@../../../Styles/page.css" text="Sơn Tùng M-TP" />
         </AnchorPane>
 

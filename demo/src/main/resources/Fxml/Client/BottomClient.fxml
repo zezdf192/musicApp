@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -24,11 +25,13 @@
     <Label layoutX="703.0" layoutY="22.0" text="--" />
     <Label layoutX="925.0" layoutY="38.0" text="P" />
     <Text fx:id="time_start" layoutX="368.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0:00" />
+
     <FontAwesomeIconView fx:id="likeSong" fill="WHITE" glyphName="HEART" layoutX="282.0" layoutY="59.0" size="18.0">
         <cursor>
             <Cursor fx:constant="HAND" />
         </cursor></FontAwesomeIconView>
     <FontAwesomeIconView glyphName="VOLUME_UP" layoutX="971.0" layoutY="52.0" size="18.0" />
     <FontAwesomeIconView fx:id="play_btn" glyphName="PAUSE" layoutX="598.0" layoutY="38.0" size="18.0" />
+
 
 </AnchorPane>

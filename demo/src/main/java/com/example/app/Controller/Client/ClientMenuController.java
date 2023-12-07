@@ -37,27 +37,45 @@ public class ClientMenuController implements Initializable {
 
     private void onHome(ActionEvent event) {
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.HOME);
-//        loadView(event, "/Fxml/Client/HomeView/Home.fxml");
     }
 
 
     private void onSearch(ActionEvent event) {
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.SEARCH);
-//        loadView(event, "/Fxml/Client/Search.fxml");
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
+
+        // Load a new instance of BottomClient
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Fxml/Client/Search.fxml"));
+        Parent viewBottomClient;
+        try {
+            viewBottomClient = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        borderPane.setCenter(viewBottomClient);
     }
 
     private void onCollection(ActionEvent event) {
+
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.COLLECTION);
+
+         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.COLLECTION);
+
 //        loadView(event, "/Fxml/Client/Collection.fxml");
     }
 
     private void onPlaylist(ActionEvent event) {
+
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.PLAY_LIST);
-//        loadView(event, "/Fxml/Client/PlayList.fxml");
     }
 
     private void onMyMusic(ActionEvent event) {
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.MY_MUSIC);
+
+         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.MY_MUSIC);
+
 //        loadView(event, "/Fxml/Client/MyMusic.fxml");
     }
 

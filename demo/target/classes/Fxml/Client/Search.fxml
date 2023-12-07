@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="625.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.app.Controller.Client.SearchController">
+
     <children>
         <AnchorPane layoutX="13.0" layoutY="18.0" prefHeight="599.0" prefWidth="934.0" style="-fx-background-color: #BCCEF8; -fx-background-radius: 12px;">
             <TextField fx:id="text_search" layoutX="44.0" layoutY="100.0" prefHeight="25.0" prefWidth="177.0" />
@@ -16,3 +17,5 @@
         </AnchorPane>
     </children>
 </AnchorPane>
+
+

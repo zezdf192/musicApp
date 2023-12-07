@@ -9,7 +9,7 @@
         <fx:include source="ClientMenu.fxml"/>
     </left>
     <center>
-        <fx:include source="HomeView/Home.fxml"/>
+        <fx:include source="Home.fxml"/>
     </center>
     <bottom>
         <fx:include source="DivBottom.fxml" />
