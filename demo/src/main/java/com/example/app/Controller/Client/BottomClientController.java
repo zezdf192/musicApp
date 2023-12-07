@@ -1,9 +1,9 @@
 package com.example.app.Controller.Client;
 
 import com.example.app.Controller.Data;
-import com.example.app.Controller.Song.ListSongPlaying;
-import com.example.app.Models.Song;
-import com.example.app.Models.SongItemHome;
+
+import com.example.app.Models.Song.ListSongPlaying;
+import com.example.app.Models.Song.Song;
 
 import javafx.event.EventHandler;
 
@@ -11,6 +11,8 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -22,8 +24,10 @@ import javafx.util.Duration;
 import java.net.URI;
 import java.net.URL;
 
-import java.util.ArrayList;
 import java.util.ResourceBundle;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.scene.paint.Color;
+
 
 public class BottomClientController implements Initializable {
 
@@ -31,15 +35,19 @@ public class BottomClientController implements Initializable {
     public Label nameSong;
     public ProgressBar progress_song;
     public Label time_end;
-    public Label play_btn;
+   // public Label play_btn;
     public Text time_start;
     public AnchorPane nameSongContainer;
     public ProgressBar volume_song;
     public Label nameUser;
+    public ImageView img;
 
     private boolean playing = true;
     private boolean isRepeat = false;
     private Song song;
+
+    public FontAwesomeIconView likeSong;
+    public FontAwesomeIconView play_btn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,6 +55,8 @@ public class BottomClientController implements Initializable {
         playSong();
         volume_song.setProgress(Data.getDataGLobal.dataGlobal.getVolumeValue());
         addListener();
+        likeSong.addEventHandler(MouseEvent.MOUSE_CLICKED, this::handleLikePlaylistClicked);
+        // Tải ảnh từ đường dẫn
     }
 
     protected void addListener() {
@@ -83,6 +93,20 @@ public class BottomClientController implements Initializable {
         volume_song.setOnMousePressed(event -> {
             updateVolume(event);
         });
+    }
+
+    private void handleLikePlaylistClicked(MouseEvent event) {
+        // Xử lý sự kiện khi biểu tượng trái tim được bấm
+        Color newColor = Color.web("#7230e4");
+        if (likeSong.getFill().equals(Color.WHITE)) {
+            // Nếu trạng thái hiện tại là trắng, đổi màu sang xanh
+            likeSong.setFill(newColor);
+        } else {
+            // Nếu trạng thái hiện tại không phải là trắng, đổi về trắng
+            likeSong.setFill(Color.WHITE);
+        }
+
+        // Thêm các hành động khác sau khi nhấn vào biểu tượng trái tim (nếu cần)
     }
 
     private void updateVolume(MouseEvent event) {
@@ -171,6 +195,11 @@ public class BottomClientController implements Initializable {
         mediaPlayer.play();
         nameSong.setText(song.getNameSong());
         nameUser.setText(song.getNameAuthor());
+
+        Image image = new Image(song.getPathImg());
+
+        // Đặt ảnh cho đối tượng ImageView
+        img.setImage(image);
         updateLabels();
     }
 

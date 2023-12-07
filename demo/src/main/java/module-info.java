@@ -6,6 +6,7 @@ module com.example.demo {
     requires de.jensd.fx.glyphs.fontawesome;
     requires cloudinary.core;
     requires cloudinary.http44;
+    requires com.microsoft.sqlserver.jdbc;
 
     opens com.example.app to javafx.fxml;
     exports com.example.app;
@@ -18,4 +19,8 @@ module com.example.demo {
     exports com.example.app.Controller.Client.Home;
     exports com.example.app.Models;
     exports com.example.app.Views;
+    exports com.example.app.Models.Song;
+    exports com.example.app.Models.Playlist;
+
+
 }

@@ -8,10 +8,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import com.example.app.Models.User.User;
 
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class SignupController implements Initializable {
     public TextField email_field;
@@ -20,6 +27,12 @@ public class SignupController implements Initializable {
     public PasswordField confirmPassword_field;
     public Button submit_signup;
     public Button change_login;
+
+    private static User user; // Đặt làm biến toàn cục
+
+    public static User getUser() {
+        return user;
+    }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -37,9 +50,13 @@ public class SignupController implements Initializable {
             String password = password_field.getText();
             String confirmPassword = confirmPassword_field.getText();
 
-            String regisDate = "abc";
+            LocalDateTime currentDateTime = LocalDateTime.now();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+            String regisDate = currentDateTime.format(formatter);
+
             String gender = "Male";
-            String roleID = "client";
 
 
             if (email.isEmpty() || userName.isEmpty() || password.isEmpty()) {
@@ -57,20 +74,47 @@ public class SignupController implements Initializable {
                 return;
             }
 
-            String sql = "INSERT INTO users (userName, email, password, regisDate, gender, roleID) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO user (role, nameUser, password, email, gender, regisDate) VALUES (?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, userName);
-                statement.setString(2, email);
+                statement.setString(1, "R2");
+                statement.setString(2, userName);
                 statement.setString(3, password);
-                statement.setString(4, regisDate);
+                statement.setString(4, email);
                 statement.setString(5, gender);
-                statement.setString(6, roleID);
+                statement.setString(6, regisDate);
 
                 // Thực hiện truy vấn
                 int rowsAffected = statement.executeUpdate();
 
                 if (rowsAffected > 0) {
                     userName_field.setText("Tạo tài khoản thành công");
+
+                    try (connection) {
+                        String getDataUser = "SELECT * FROM user where email = ?";
+                        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                            preparedStatement.setString(1, email);
+
+                            try (ResultSet resultSet = preparedStatement.executeQuery(getDataUser)) {
+                                while (resultSet.next()) {
+                                    String nameUser = resultSet.getString("nameUser");
+                                    Integer userId = resultSet.getInt("userId");
+                                    String userEmail = resultSet.getString("email");
+                                    String userGender = resultSet.getString("gender");
+
+                                    user = new User();
+
+                                    user.setUserName(nameUser);
+                                    user.setUserEmail(userEmail);
+                                    user.setUserGender(userGender);
+                                    user.setUserId(userId);
+                                }
+                            }
+                        } catch (SQLException e) {
+                            e.printStackTrace(); // Handle the exception appropriately
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     Stage stage = (Stage) submit_signup.getScene().getWindow();
                     Model.getInstance().getViewFactory().closeStage(stage);
 

@@ -1,14 +1,13 @@
 package com.example.app.Controller;
 
 import com.example.app.ConnectDB.ConnectDB;
-import com.example.app.Controller.Client.BottomClientController;
-import com.example.app.Controller.Client.ListPlayList;
-import com.example.app.Controller.Song.HandleSong;
-import com.example.app.Controller.Song.ListSongPlaying;
+import com.example.app.Models.Playlist.ListPlayList;
+
 import com.example.app.Models.Model;
-import com.example.app.Models.PlaylistItem;
-import com.example.app.Models.Song;
-import javafx.collections.FXCollections;
+import com.example.app.Models.Playlist.PlaylistItem;
+import com.example.app.Models.Song.ListSongPlaying;
+import com.example.app.Models.User.User;
+import com.example.app.Models.Song.Song;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -25,45 +24,70 @@ public class LoginController implements Initializable {
     public PasswordField password_field;
     public TextField email_field;
 
+    private static User user; // Đặt làm biến toàn cục
+
+    public static User getUser() {
+        return user;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        login_btn.setOnAction(event -> onLogin());
+        login_btn.setOnAction(actionEvent -> {
+            try {
+                onLogin();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         change_signup.setOnAction(actionEvent -> change_signup());
 
-        PlaylistItem PlaylistItem1 = new PlaylistItem("Thiên Nhiên", "Những thanh âm giai điệu thiên nhiên...");
-        PlaylistItem PlaylistItem2 = new PlaylistItem("Thiên Nhiên", "Những thanh âm giai điệu thiên nhiên...");
-        // ... (create other PlaylistItems)
-
-        ListPlayList.ListPlayListGlobal.songList.addListPlayList(PlaylistItem1);
-        ListPlayList.ListPlayListGlobal.songList.addListPlayList(PlaylistItem2);
-        addSongByDatabase();
+        //addSongByDatabase();
+        addListSongByDatabase();
 
     }
 
-    private void onLogin() {
-//        try{
-////            Connection connection = ConnectDB.getConnection();
-////            String query = "select * from songs";
-////            Statement statement = connection.createStatement();
-////            ResultSet resultSet = statement.executeQuery(query);
-////            while (resultSet.next()) {
-////                System.out.println("songID " + resultSet.getString("songID"));
-////                System.out.println("PathSOng" + resultSet.getString("pathSong"));
-//            }
-//
-//
-//        }catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
+    private void onLogin() throws SQLException {
 
         String email = email_field.getText();
         String password = password_field.getText();
-//
-//        if (email.isEmpty() || password.isEmpty()) {
-//            showAlert("Lỗi", "Vui lòng nhập email và mật khẩu!", Alert.AlertType.ERROR);
-//            return;
-//        }
-        //Connection connection = ConnectDB.getConnection()
+
+        if (email.isEmpty() || password.isEmpty()) {
+            showAlert("Lỗi", "Vui lòng nhập email và mật khẩu!", Alert.AlertType.ERROR);
+            return;
+        }
+        Connection connection = ConnectDB.getConnection();
+
+        try (connection) {
+            String sql = "SELECT * FROM user where email = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, email);
+
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        String userName = resultSet.getString("nameUser");
+                        Integer userId = resultSet.getInt("userId");
+                        String userEmail = resultSet.getString("email");
+                        String userGender = resultSet.getString("gender");
+
+
+
+                        //User user = new User(userName, userId, userEmail,userGender);
+                        user = new User();
+
+                        user.setUserName(userName);
+                        user.setUserEmail(userEmail);
+                        user.setUserGender(userGender);
+                        user.setUserId(userId);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Handle the exception appropriately
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         try  {
 
             //validateLogin(email, password, connection
@@ -72,7 +96,6 @@ public class LoginController implements Initializable {
                 showAlert("Thông báo", "Đăng nhập thành công!", Alert.AlertType.INFORMATION);
                 Stage stage = (Stage) login_btn.getScene().getWindow();
                 Model.getInstance().getViewFactory().closeStage(stage);
-
                 Model.getInstance().getViewFactory().showClientWindow();
             } else {
                 showAlert("Lỗi", "Email hoặc mật khẩu không đúng!", Alert.AlertType.ERROR);
@@ -81,8 +104,6 @@ public class LoginController implements Initializable {
             e.printStackTrace();
             showAlert("Lỗi", "Lỗi không xác định!", Alert.AlertType.ERROR);
         }
-
-
     }
 
     private  void change_signup () {
@@ -120,6 +141,7 @@ public class LoginController implements Initializable {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
+                int songId = resultSet.getInt("songId");
                 String nameSong = resultSet.getString("nameSong");
                 String nameAuthor = resultSet.getString("nameUser");
                 String dateCreated =  resultSet.getString("dateCreated");
@@ -127,8 +149,44 @@ public class LoginController implements Initializable {
                 String pathSong =  resultSet.getString("pathSong");
                 String pathImg =  resultSet.getString("pathImg");
                 String kindOfSong =  resultSet.getString("kindOfSong");
-                Song song = new Song(nameSong, nameAuthor, dateCreated, totalLike, pathSong, pathImg, kindOfSong);
+                Song song = new Song(songId, nameSong, nameAuthor, dateCreated, totalLike, pathSong, pathImg, kindOfSong);
                 ListSongPlaying.SongListGlobal.songList.addSong(song);
+            }
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addListSongByDatabase() {
+//        PlaylistItem playlistItem1 = new PlaylistItem("https://res.cloudinary.com/djfpcyyfe/image/upload/v1701668515/onwlan7vp5kl2ujtydgd.webp","Thiên Nhiên", "Những thanh âm giai điệu thiên nhiên...");
+//        PlaylistItem playlistItem2 = new PlaylistItem("https://res.cloudinary.com/djfpcyyfe/image/upload/v1701668515/onwlan7vp5kl2ujtydgd.webp", "Thiên Nhiên", "Những thanh âm giai điệu thiên nhiên...");
+//        // ... (create other PlaylistItems)
+//
+//        ListPlayList.ListPlayListGlobal.songList.addListPlayList(playlistItem1);
+//        ListPlayList.ListPlayListGlobal.songList.addListPlayList(playlistItem2);
+//
+//        ListSongPlaying.SongListGlobal.songList.removeListSong();
+
+        try{
+            Connection connection = ConnectDB.getConnection();
+            String query = "select * from playlist";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                int playlistId = resultSet.getInt("playlistId");
+                String thumbnailPlaylist = resultSet.getString("thumbnailPlaylist");
+                String category =  resultSet.getString("category");
+                String namePlaylist =  resultSet.getString("namePlaylist");
+                int authorId =  resultSet.getInt("authorId");
+                int quantitySong =  resultSet.getInt("quantitySong");
+                String description =  resultSet.getString("description");
+
+                PlaylistItem playlistItem = new PlaylistItem(playlistId, thumbnailPlaylist, category,
+                        namePlaylist, authorId, quantitySong, description);
+                ListPlayList.ListPlayListGlobal.songList.addListPlayList(playlistItem);
             }
 
 

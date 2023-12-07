@@ -40,7 +40,7 @@ public class TopHomeController implements Initializable {
                     throw new RuntimeException(e);
                 }
 
-                // Set the new BottomClient as the bottom of the BorderPane
+                // Set the new BottomClient as the bottom of the o
                 Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.DETAIL);
                 borderPane.setCenter(viewBottomClient);
 

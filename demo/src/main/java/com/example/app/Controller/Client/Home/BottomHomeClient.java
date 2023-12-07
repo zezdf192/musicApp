@@ -1,16 +1,13 @@
 package com.example.app.Controller.Client.Home;
 
-import com.example.app.Controller.Client.ListPlayList;
+import com.example.app.Models.Playlist.ListPlayList;
 import com.example.app.Controller.Client.PlaylistItemController;
-import com.example.app.Controller.Client.SongItemController;
-import com.example.app.Controller.Song.ListSongPlaying;
-import com.example.app.Models.PlaylistItem;
-import com.example.app.Models.Song;
+
+import com.example.app.Models.Playlist.PlaylistItem;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.List;
@@ -27,7 +24,6 @@ public class BottomHomeClient implements Initializable {
 
     private void playList_Item_Layout() {
 
-        // ... (add other PlaylistItems)
         List<PlaylistItem> listPlaylist = ListPlayList.ListPlayListGlobal.songList.getListPlaylist_Item();
 
         for (int i = 0; i < listPlaylist.size(); i++) {
@@ -43,9 +39,5 @@ public class BottomHomeClient implements Initializable {
                 e.printStackTrace();
             }
         }
-
-
-
-
     }
 }

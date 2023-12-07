@@ -12,12 +12,13 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mssql-jdbc-12.4.2.jre11" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.28" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:22-ea+16" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:win:22-ea+16" level="project" />
+    <orderEntry type="library" name="javafx-graphics-21.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:22-ea+16" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:22-ea+16" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:22-ea+16" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:22-ea+16" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:22-ea+16" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:win:22-ea+16" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:22-ea+16" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:22-ea+16" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:22-ea+16" level="project" />

@@ -1,12 +1,9 @@
 package com.example.app.Controller.Client;
 
 import com.example.app.ConnectDB.ConnectDB;
-import com.example.app.Controller.Data;
-import com.example.app.Controller.Song.ListSongPlaying;
-import com.example.app.Models.Song;
-import javafx.animation.KeyFrame;
+
+import com.example.app.Models.Song.Song;
 import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -58,6 +55,7 @@ public class SearchController implements Initializable {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
+                int songId = resultSet.getInt("songId");
                 String nameSong = resultSet.getString("nameSong");
                 String nameAuthor = resultSet.getString("nameUser");
                 String dateCreated =  resultSet.getString("dateCreated");
@@ -65,7 +63,7 @@ public class SearchController implements Initializable {
                 String pathSong =  resultSet.getString("pathSong");
                 String pathImg =  resultSet.getString("pathImg");
                 String kindOfSong =  resultSet.getString("kindOfSong");
-                Song song = new Song(nameSong, nameAuthor, dateCreated, totalLike, pathSong, pathImg, kindOfSong);
+                Song song = new Song(songId, nameSong, nameAuthor, dateCreated, totalLike, pathSong, pathImg, kindOfSong);
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/Fxml/Client/SongView/SongItem.fxml"));

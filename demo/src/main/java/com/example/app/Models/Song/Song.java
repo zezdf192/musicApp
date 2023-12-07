@@ -1,6 +1,7 @@
-package com.example.app.Models;
+package com.example.app.Models.Song;
 
 public class Song {
+    int songId;
     String nameSong;
     String nameAuthor;
     int authorId;
@@ -17,7 +18,12 @@ public class Song {
 
     }
 
-    public Song(String nameSong, String nameAuthor, String dateCreated, String totalLike, String pathSong, String pathImg, String kindOfSong) {
+    public int getSongId() {
+        return songId;
+    }
+
+    public Song(int songId, String nameSong, String nameAuthor, String dateCreated, String totalLike, String pathSong, String pathImg, String kindOfSong) {
+        this.songId = songId;
         this.nameSong = nameSong;
         this.nameAuthor = nameAuthor;
 

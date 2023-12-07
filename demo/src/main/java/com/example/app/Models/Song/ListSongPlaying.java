@@ -1,15 +1,7 @@
-package com.example.app.Controller.Song;
+package com.example.app.Models.Song;
 
-import com.example.app.Controller.Client.BottomClientController;
-
-import com.example.app.Models.Song;
-import com.example.app.Models.SongItemHome;
-import javafx.fxml.Initializable;
-
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class ListSongPlaying  {
     private int sttPlaySong;

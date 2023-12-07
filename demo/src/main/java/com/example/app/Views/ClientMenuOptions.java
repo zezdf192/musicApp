@@ -10,6 +10,7 @@ public enum ClientMenuOptions {
     PLAY_LIST,
     BOTTOM_VIEW,
     DIV,
-    DETAIL
+    DETAIL,
+    X
 
 }

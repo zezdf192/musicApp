@@ -28,6 +28,7 @@ public class MyMusicController implements Initializable {
     public TextField nameSong;
     public ComboBox<String> genreComboBox;
     public Button upload;
+    public ComboBox<String> privacy_comboBox;
 
     private String urlSong;
     private String urlThumbnail;
@@ -40,8 +41,13 @@ public class MyMusicController implements Initializable {
                 "Pop", "Rock", "Hip Hop", "R&B", "Country", "Jazz", "Classical"
         );
 
+        ObservableList<String> privacy = FXCollections.observableArrayList(
+                "Public", "Private"
+        );
+
         // Thêm danh sách vào ComboBox
         genreComboBox.setItems(genres);
+        privacy_comboBox.setItems(privacy);
 
         upload.setOnAction(actionEvent -> create_Song());
 
@@ -97,6 +103,7 @@ public class MyMusicController implements Initializable {
     }
 
     private void create_Song() {
+
         try (Connection connection = ConnectDB.getConnection()) {
             String songName = nameSong.getText();
             String pathSong = urlSong;
@@ -107,8 +114,11 @@ public class MyMusicController implements Initializable {
             if (songName.isEmpty() || pathSong.isEmpty() || thumbnail.isEmpty() || kindOfSong.isEmpty()) {
                 showAlert("Lỗi", "Thông tin bài nhạc bị khiếm khuyết!", Alert.AlertType.ERROR);
             } else {
-                String sql = "INSERT INTO song (nameSong, authorId, abumId, dateCreated, pathSong, kindOfSong, playListId, totalLike, pathImg) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+                String sql = "INSERT INTO song (nameSong, authorId, abumId, dateCreated, pathSong, kindOfSong, playListId, totalLike, pathImg, privacy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String privacy_code = "P2";
+                if(privacy_comboBox.getValue().equals("Public")) {
+                    privacy_code = "P3";
+                }
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, songName);
                     preparedStatement.setInt(2,10);
@@ -119,13 +129,18 @@ public class MyMusicController implements Initializable {
                     preparedStatement.setInt(7,1);
                     preparedStatement.setInt(8, 0);
                     preparedStatement.setString(9, thumbnail);
-
+                    preparedStatement.setString(10, privacy_code);
 
 
                     int rowsAffected = preparedStatement.executeUpdate();
 
                     if (rowsAffected > 0) {
-                        showAlert("Thành công", "Bài hát đã được thêm thành công!", Alert.AlertType.INFORMATION);
+                        if(privacy_comboBox.getValue().equals("Public")) {
+                            showAlert("Thành công", "Bài hát của bạn đã được thêm, vui lòng chờ quản trị viên kiểm duyệt để công khai bài hát đến mọi người!", Alert.AlertType.INFORMATION);
+                        }else{
+                            showAlert("Thành công", "Bài hát đã được thêm thành công!", Alert.AlertType.INFORMATION);
+                        }
+
                         // You can add further actions or UI updates here after successful insertion
                     } else {
                         showAlert("Lỗi", "Không thể thêm bài hát!", Alert.AlertType.ERROR);
