@@ -22,8 +22,7 @@ module com.example.demo {
 
     exports com.example.app.Models.Song;
     exports com.example.app.Models.Playlist;
-
-
-
+    exports com.example.app.Controller.Admin.ManageUser;
+    exports com.example.app.Controller.Admin.ManageSong;
 
 }

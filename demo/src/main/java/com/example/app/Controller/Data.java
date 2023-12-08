@@ -1,5 +1,7 @@
 package com.example.app.Controller;
 
+import com.example.app.Models.Admin.ItemSong;
+import com.example.app.Models.Admin.ItemUser;
 import com.example.app.Models.Playlist.CurrentPlaylist;
 import com.example.app.Models.Song.Song;
 import com.example.app.Models.User.User;
@@ -13,13 +15,15 @@ public class Data {
 
     private CurrentPlaylist currentPlaylist;
 
-//    private User currentUser;
+     private ItemUser currentEditUser;
 
+     private ItemSong currentEditSong;
 
     public Data() {
         volumeValue = 0.5;
         currentSong = new Song();
         currentPlaylist = new CurrentPlaylist();
+        currentEditUser = new ItemUser();
     }
     //Remove
     public void setVolumeValue(double volumeValue) {
@@ -53,11 +57,28 @@ public class Data {
 //    public void setCurrentUser (User currentUser) {this.currentUser = currentUser;}
 //    public User getCurrentUser() {return currentUser;}
 
+
+    public ItemUser getCurrentEditUser() {
+        return currentEditUser;
+    }
+
+    public void setCurrentEditUser(ItemUser currentEditUser) {
+        this.currentEditUser = currentEditUser;
+    }
+
+    public ItemSong getCurrentEditSong() {
+        return currentEditSong;
+    }
+
+    public void setCurrentEditSong(ItemSong currentEditSong) {
+        this.currentEditSong = currentEditSong;
+    }
+
     public class getDataGLobal {
         public static Data dataGlobal = new Data();
     }
 
-    // User
+
 
 
 }

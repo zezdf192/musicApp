@@ -62,9 +62,7 @@ public class ClientMenuController implements Initializable {
 
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.COLLECTION);
 
-         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.COLLECTION);
 
-//        loadView(event, "/Fxml/Client/Collection.fxml");
     }
 
     private void onPlaylist(ActionEvent event) {
