@@ -22,6 +22,11 @@ public class AdminMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         manage_user.setOnAction(event -> manageUserView());
         manage_song.setOnAction(event -> manageSongView());
+        abum.setOnAction(event -> manage_album());
+    }
+
+    private void manage_album() {
+        Model.getInstance().getViewAdminFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.ABUM);
     }
 
     private void manageUserView() {

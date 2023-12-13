@@ -9,8 +9,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import javafx.util.Duration;
-import javafx.animation.PauseTransition;
 
 
 public class ViewFactory {
@@ -24,7 +22,7 @@ public class ViewFactory {
     private AnchorPane bottomView;
     private AnchorPane divView;
 
-    private final Duration loadingDuration = Duration.seconds(2);
+
 
     public ViewFactory() {
         this.clientSelectedMenuItem = new SimpleObjectProperty<>();
@@ -43,7 +41,7 @@ public class ViewFactory {
         if (homeView == null) {
             try {
                 homeView = new FXMLLoader(getClass().getResource("/Fxml/Client/HomeView/Home.fxml")).load();
-                simulateLoading();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -55,7 +53,7 @@ public class ViewFactory {
         if (searchView == null) {
             try {
                 searchView = new FXMLLoader(getClass().getResource("/Fxml/Client/Search.fxml")).load();
-                simulateLoading();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -66,7 +64,7 @@ public class ViewFactory {
         if (collectionView == null) {
             try {
                 collectionView = new FXMLLoader(getClass().getResource("/Fxml/Client/Collection.fxml")).load();
-                simulateLoading();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -77,7 +75,7 @@ public class ViewFactory {
         if (myMusicView == null) {
             try {
                 myMusicView = new FXMLLoader(getClass().getResource("/Fxml/Client/MyMusic.fxml")).load();
-                simulateLoading();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -88,7 +86,7 @@ public class ViewFactory {
         if (playlistView == null) {
             try {
                 playlistView = new FXMLLoader(getClass().getResource("/Fxml/Client/PlayList.fxml")).load();
-                simulateLoading();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -99,7 +97,7 @@ public class ViewFactory {
         if (bottomView == null) {
             try {
                 bottomView = new FXMLLoader(getClass().getResource("/Fxml/Client/BottomClient.fxml")).load();
-                simulateLoading();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -110,7 +108,7 @@ public class ViewFactory {
         if (divView == null) {
             try {
                 divView = new FXMLLoader(getClass().getResource("/Fxml/Client/DivBottom.fxml")).load();
-                simulateLoading();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -138,21 +136,14 @@ public class ViewFactory {
         stage.show();
     }
 
-    private void simulateLoading() {
-        PauseTransition delay = new PauseTransition(loadingDuration);
-        delay.setOnFinished(event -> {
-            // Các công việc sau khi dữ liệu đã tải xong
-            System.out.println("Data loaded!");
-        });
-        delay.play();
-    }
+
 
     public Scene loadScene() {
         if (scene == null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/Client.fxml"));
                 scene = new Scene(loader.load());
-                simulateLoading();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

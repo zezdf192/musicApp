@@ -1,7 +1,6 @@
 package com.example.app.Views;
 
 import com.example.app.Controller.Admin.AdminController;
-import com.example.app.Controller.Client.ClientController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +16,8 @@ public class ViewAdminFactory {
     private AnchorPane manageUserView;
 
     private AnchorPane manageUserSong;
+
+    private AnchorPane manageAlbum;
 
     public ViewAdminFactory() {
         this.adminSelectedMenuItem = new SimpleObjectProperty<>();
@@ -46,6 +47,17 @@ public class ViewAdminFactory {
             }
         }
         return manageUserSong;
+    }
+
+    public AnchorPane getManageAlbum() {
+        if (manageAlbum == null) {
+            try {
+                manageAlbum = new FXMLLoader(getClass().getResource("/Fxml/Admin/ManageAlbum/ManageAlbum.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return manageAlbum;
     }
 
     public void showAdminWindow() {

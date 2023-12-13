@@ -1,24 +1,32 @@
 package com.example.app.Controller;
 
+import com.example.app.Models.Admin.ItemAlbum;
 import com.example.app.Models.Admin.ItemSong;
 import com.example.app.Models.Admin.ItemUser;
 import com.example.app.Models.Playlist.CurrentPlaylist;
+import com.example.app.Models.Playlist.PlaylistItem;
 import com.example.app.Models.Song.Song;
 import com.example.app.Models.User.User;
+
+import java.util.List;
 
 public class Data {
 //    private String nameUser;
 
     private double volumeValue;
 
+    private List<PlaylistItem> listPlaylistUserLike;
     private Song currentSong;
 
     private CurrentPlaylist currentPlaylist;
 
-    private User currentUser;
-     private ItemUser currentEditUser;
+    private ItemUser currentEditUser;
 
-     private ItemSong currentEditSong;
+    private ItemSong currentEditSong;
+
+    private ItemAlbum currentEditAlbum;
+
+    private User currentUser;
 
     public Data() {
         volumeValue = 0.5;
@@ -55,15 +63,8 @@ public class Data {
     }
 
     // User
-
-
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-    }
+//    public void setCurrentUser (User currentUser) {this.currentUser = currentUser;}
+//    public User getCurrentUser() {return currentUser;}
 
 
     public ItemUser getCurrentEditUser() {
@@ -82,11 +83,33 @@ public class Data {
         this.currentEditSong = currentEditSong;
     }
 
+    public ItemAlbum getCurrentEditAlbum() {
+        return currentEditAlbum;
+    }
+
+    public void setCurrentEditAlbum(ItemAlbum currentEditAlbum) {
+        this.currentEditAlbum = currentEditAlbum;
+    }
+
+
+    public List<PlaylistItem> getListPlaylistUserLike() {
+        return listPlaylistUserLike;
+    }
+
+    public void setListPlaylistUserLike(List<PlaylistItem> listPlaylistUserLike) {
+        this.listPlaylistUserLike = listPlaylistUserLike;
+    }
+
     public class getDataGLobal {
         public static Data dataGlobal = new Data();
     }
 
 
+    public User getCurrentUser() {
+        return currentUser;
+    }
 
-
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
 }

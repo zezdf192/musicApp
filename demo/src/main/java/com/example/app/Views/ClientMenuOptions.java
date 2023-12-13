@@ -1,7 +1,5 @@
 package com.example.app.Views;
 
-import javafx.fxml.Initializable;
-
 public enum ClientMenuOptions {
     HOME,
     SEARCH,
