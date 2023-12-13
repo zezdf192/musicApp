@@ -98,6 +98,7 @@ public class LoginController implements Initializable {
                 Stage stage = (Stage) login_btn.getScene().getWindow();
                 Model.getInstance().getViewFactory().closeStage(stage);
                 Model.getInstance().getViewFactory().showClientWindow();
+                //Model.getInstance().getViewAdminFactory().showAdminWindow();
             } else {
                 showAlert("Lỗi", "Email hoặc mật khẩu không đúng!", Alert.AlertType.ERROR);
             }
