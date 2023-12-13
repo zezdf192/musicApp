@@ -31,6 +31,7 @@ import javafx.scene.paint.Color;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -59,13 +60,9 @@ public class DetailPlaylistController implements Initializable {
         Image image = new Image(currentPlaylist.getThumbnailPlaylist());
         img.setImage(image);
 
+        Integer playlistId = currentPlaylist.getPlaylistId();
 
-
-
-        user = LoginController.getUser();
-        if (user == null) {
-            user = SignupController.getUser();
-        }
+        User user = Data.getDataGLobal.dataGlobal.getCurrentUser();
         Integer userId = (user != null) ? user.getUserId() : null;
 
         List<Song> listsongs = ListSongPlaying.SongListGlobal.songList.getListSongs();
@@ -83,10 +80,12 @@ public class DetailPlaylistController implements Initializable {
             }
         }
 
+        checkIfPlaylistIsLiked(playlistId, userId);
+
         like_Playlist.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             try {
                 if (userId != null) {
-                    handleLikePlaylistClicked(event, userId);
+                    handleLikePlaylistClicked(event, playlistId, userId);
                 } else {
                     // Handle the case where userId is null (optional)
                     System.out.println("UserId not found!");
@@ -97,18 +96,28 @@ public class DetailPlaylistController implements Initializable {
         });
     }
 
-    private void handleLikePlaylistClicked(MouseEvent event, Integer userId) throws SQLException {
+    private void handleLikePlaylistClicked(MouseEvent event,Integer playlistId, Integer userId) throws SQLException {
         Color newColor = Color.web("#7230e4");
         if (like_Playlist.getFill().equals(Color.WHITE)) {
             like_Playlist.setFill(newColor);
             des_likePlaylist.setText("Đã thêm vào bộ sưu tập!");
 
             try (Connection connection = ConnectDB.getConnection()) {
-                String sql = "INSERT INTO likeplaylist (userId) VALUES (?)";
+                String sql = "INSERT INTO likeplaylist (playlistId, userId) VALUES (?, ?)";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                    preparedStatement.setInt(1, userId);
-                    // Execute the statement if needed
+                    preparedStatement.setInt(1, playlistId);
+                    preparedStatement.setInt(2, userId);
+
+                    int rowsAffected = preparedStatement.executeUpdate();
+
+                    // Kiểm tra xem truy vấn đã thành công hay không
+                    if (rowsAffected > 0) {
+                        System.out.println("Like playlist successfully added.");
+                    } else {
+                        System.out.println("Failed to like playlist.");
+                    }
                 }
+
             } catch (Exception e) {
                 e.printStackTrace();
                 // Handle the exception as needed (log or show user-friendly message)
@@ -116,10 +125,47 @@ public class DetailPlaylistController implements Initializable {
         } else {
             like_Playlist.setFill(Color.WHITE);
             des_likePlaylist.setText("Bạn có thích Playlist này?");
+
+            try (Connection connection = ConnectDB.getConnection()) {
+                String deleteLikePLaylist = "DELETE from likeplaylist where playlistId = ?";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(deleteLikePLaylist)) {
+                    preparedStatement.setInt(1, playlistId);
+                    int rowsAffected = preparedStatement.executeUpdate();
+
+                    // Kiểm tra xem truy vấn đã thành công hay không
+                    if (rowsAffected > 0) {
+                        System.out.println("Like playlist successfully added.");
+                    } else {
+                        System.out.println("Failed to like playlist.");
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         // Additional actions after clicking the heart icon can be added here
     }
+    private void checkIfPlaylistIsLiked(Integer playlistId, Integer userId) {
+        Color newColor = Color.web("#7230e4");
+        try (Connection connection = ConnectDB.getConnection()) {
+            String checkLikeSong = "SELECT * FROM likeplaylist WHERE playlistId = ? AND userId = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(checkLikeSong)) {
+                preparedStatement.setInt(1, playlistId);
+                preparedStatement.setInt(2, userId);
 
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        // Bài hát đã được thích, đặt màu cho hình trái tim
+                        like_Playlist.setFill(newColor);
+                        des_likePlaylist.setText("Đã thêm vào bộ sưu tập!");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed (log or show user-friendly message)
+        }
+    }
 }
 
 

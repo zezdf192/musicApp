@@ -59,17 +59,40 @@ public class ClientMenuController implements Initializable {
     }
 
     private void onCollection(ActionEvent event) {
-
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.COLLECTION);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
 
-         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.COLLECTION);
+        // Load a new instance of BottomClient
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Fxml/Client/Collection.fxml"));
+        Parent viewBottomClient;
+        try {
+            viewBottomClient = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-//        loadView(event, "/Fxml/Client/Collection.fxml");
+        borderPane.setCenter(viewBottomClient);
     }
 
     private void onPlaylist(ActionEvent event) {
 
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.PLAY_LIST);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
+
+        // Load a new instance of BottomClient
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/Fxml/Client/PlayList.fxml"));
+        Parent viewBottomClient;
+        try {
+            viewBottomClient = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        borderPane.setCenter(viewBottomClient);
     }
 
     private void onMyMusic(ActionEvent event) {

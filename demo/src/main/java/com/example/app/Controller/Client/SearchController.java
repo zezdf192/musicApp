@@ -53,7 +53,7 @@ public class SearchController implements Initializable {
             String query = "select * from song join user on song.authorId = user.userId and nameSong LIKE '%" + text + "%' ";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
-
+            System.out.println(resultSet);
             while (resultSet.next()) {
                 int songId = resultSet.getInt("songId");
                 String nameSong = resultSet.getString("nameSong");

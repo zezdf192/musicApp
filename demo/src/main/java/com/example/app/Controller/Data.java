@@ -13,7 +13,7 @@ public class Data {
 
     private CurrentPlaylist currentPlaylist;
 
-//    private User currentUser;
+    private User currentUser;
 
 
     public Data() {
@@ -50,8 +50,15 @@ public class Data {
     }
 
     // User
-//    public void setCurrentUser (User currentUser) {this.currentUser = currentUser;}
-//    public User getCurrentUser() {return currentUser;}
+
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
 
     public class getDataGLobal {
         public static Data dataGlobal = new Data();

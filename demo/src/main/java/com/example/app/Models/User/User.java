@@ -8,12 +8,12 @@ public class User {
 
     // Constructor
 
-    //    public User (String userName, Integer userId, String userEmail, String userGender) {
-//        this.userName = userName;
-//        this.userId = userId;
-//        this.userEmail = userEmail;
-//        this.userGender = userGender;
-//    }
+        public User (String userName, Integer userId, String userEmail, String userGender) {
+        this.userName = userName;
+        this.userId = userId;
+        this.userEmail = userEmail;
+        this.userGender = userGender;
+    }
     // Getters and setters
     public String getUserName() {
         return userName;

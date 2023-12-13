@@ -24,4 +24,10 @@ public class ListPlayList {
     public class ListPlayListGlobal {
         public static ListPlayList songList = new ListPlayList();
     }
+    public class ListPlaylistCurrentUser {
+        public static ListPlayList songList = new ListPlayList();
+    }
+    public class ListPlaylistLiked {
+        public static ListPlayList songList = new ListPlayList();
+    }
 }

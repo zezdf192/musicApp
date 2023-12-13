@@ -23,8 +23,8 @@ public class BottomHomeClient implements Initializable {
     }
 
     private void playList_Item_Layout() {
-
         List<PlaylistItem> listPlaylist = ListPlayList.ListPlayListGlobal.songList.getListPlaylist_Item();
+
 
         for (int i = 0; i < listPlaylist.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();

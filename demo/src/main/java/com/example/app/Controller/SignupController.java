@@ -28,11 +28,11 @@ public class SignupController implements Initializable {
     public Button submit_signup;
     public Button change_login;
 
-    private static User user; // Đặt làm biến toàn cục
+//    private static User user; // Đặt làm biến toàn cục
 
-    public static User getUser() {
-        return user;
-    }
+//    public static User getUser() {
+//        return user;
+//    }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -101,12 +101,12 @@ public class SignupController implements Initializable {
                                     String userEmail = resultSet.getString("email");
                                     String userGender = resultSet.getString("gender");
 
-                                    user = new User();
-
-                                    user.setUserName(nameUser);
-                                    user.setUserEmail(userEmail);
-                                    user.setUserGender(userGender);
-                                    user.setUserId(userId);
+//                                    user = new User();
+//
+//                                    user.setUserName(nameUser);
+//                                    user.setUserEmail(userEmail);
+//                                    user.setUserGender(userGender);
+//                                    user.setUserId(userId);
                                 }
                             }
                         } catch (SQLException e) {

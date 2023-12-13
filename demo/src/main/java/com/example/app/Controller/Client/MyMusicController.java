@@ -2,24 +2,31 @@ package com.example.app.Controller.Client;
 
 import com.cloudinary.Cloudinary;
 import com.example.app.ConnectDB.ConnectDB;
+import com.example.app.Controller.Data;
+import com.example.app.Controller.LoginController;
+import com.example.app.Controller.SignupController;
+import com.example.app.Models.Song.Song;
+import com.example.app.Models.User.User;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.Connection;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 
 public class MyMusicController implements Initializable {
@@ -29,9 +36,12 @@ public class MyMusicController implements Initializable {
     public ComboBox<String> genreComboBox;
     public Button upload;
     public ComboBox<String> privacy_comboBox;
+    public VBox song_upload;
 
     private String urlSong;
     private String urlThumbnail;
+
+    private User user;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         upload_song.setOnAction(actionEvent -> urlSong = uploadSongs(upload_song));
@@ -49,8 +59,21 @@ public class MyMusicController implements Initializable {
         genreComboBox.setItems(genres);
         privacy_comboBox.setItems(privacy);
 
-        upload.setOnAction(actionEvent -> create_Song());
+//        user = LoginController.getUser();
+//        if (user == null) {
+//            user = SignupController.getUser();
+//        }
+//        Integer userId = (user != null) ? user.getUserId() : null;
 
+        User user = Data.getDataGLobal.dataGlobal.getCurrentUser();
+        Integer userId = (user != null) ? user.getUserId() : null;
+
+
+        upload.setOnAction(actionEvent -> create_Song(userId));
+
+        // User
+
+        getDataSongUpload(userId);
     }
 
     private String uploadSongs(Button buttonUpdate) {
@@ -102,7 +125,7 @@ public class MyMusicController implements Initializable {
         return null;
     }
 
-    private void create_Song() {
+    private void create_Song(Integer userId) {
 
         try (Connection connection = ConnectDB.getConnection()) {
             String songName = nameSong.getText();
@@ -114,22 +137,20 @@ public class MyMusicController implements Initializable {
             if (songName.isEmpty() || pathSong.isEmpty() || thumbnail.isEmpty() || kindOfSong.isEmpty()) {
                 showAlert("Lỗi", "Thông tin bài nhạc bị khiếm khuyết!", Alert.AlertType.ERROR);
             } else {
-                String sql = "INSERT INTO song (nameSong, authorId, abumId, dateCreated, pathSong, kindOfSong, playListId, totalLike, pathImg, privacy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO song (nameSong, authorId, dateCreated, pathSong, kindOfSong, totalLike, pathImg, privacy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 String privacy_code = "P2";
                 if(privacy_comboBox.getValue().equals("Public")) {
                     privacy_code = "P3";
                 }
                 try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                     preparedStatement.setString(1, songName);
-                    preparedStatement.setInt(2,10);
-                    preparedStatement.setInt(3, 1);
-                    preparedStatement.setString(4, "1/1/1111");
-                    preparedStatement.setString(5, pathSong);
-                    preparedStatement.setString(6, kindOfSong);
-                    preparedStatement.setInt(7,1);
-                    preparedStatement.setInt(8, 0);
-                    preparedStatement.setString(9, thumbnail);
-                    preparedStatement.setString(10, privacy_code);
+                    preparedStatement.setInt(2,userId);
+                    preparedStatement.setString(3, "1/1/1111");
+                    preparedStatement.setString(4, pathSong);
+                    preparedStatement.setString(5, kindOfSong);
+                    preparedStatement.setInt(6,1);
+                    preparedStatement.setString(7, thumbnail);
+                    preparedStatement.setString(8, privacy_code);
 
 
                     int rowsAffected = preparedStatement.executeUpdate();
@@ -150,6 +171,46 @@ public class MyMusicController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Lỗi", "Lỗi không xác định!", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void getDataSongUpload (Integer userId) {
+        try{
+            Connection connection = ConnectDB.getConnection();
+            String query = "SELECT * FROM song where authorId = ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setInt(1, userId);
+                try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()) {
+                        int songId = resultSet.getInt("songId");
+                        String nameSong = resultSet.getString("nameSong");
+                        String nameAuthor = resultSet.getString("authorId");
+                        String dateCreated =  resultSet.getString("dateCreated");
+                        String totalLike =  resultSet.getString("totalLike");
+                        String pathSong =  resultSet.getString("pathSong");
+                        String pathImg =  resultSet.getString("pathImg");
+                        String kindOfSong =  resultSet.getString("kindOfSong");
+                        Song song = new Song(songId, nameSong, nameAuthor, dateCreated, totalLike, pathSong, pathImg, kindOfSong);
+
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(getClass().getResource("/Fxml/Client/SongView/SongItem.fxml"));
+                        try {
+                            AnchorPane hBox = fxmlLoader.load();
+                            SongItemController cic = fxmlLoader.getController();
+                            cic.setData(song);
+                            song_upload.getChildren().add(hBox);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

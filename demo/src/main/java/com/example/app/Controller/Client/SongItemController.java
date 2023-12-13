@@ -45,6 +45,8 @@ public class SongItemController extends BottomClientController  implements Initi
     private boolean bool = false;
     public String pathImg;
 
+    public Integer songId;
+
 
     private Text time_start;
 
@@ -53,10 +55,12 @@ public class SongItemController extends BottomClientController  implements Initi
     public String pathSong;
 
 
+
     public void setData(Song song) {
         // Tải ảnh từ đường dẫn
         Image image = new Image(song.getPathImg());
         pathImg = song.getPathImg();
+        songId = song.getSongId();
         // Đặt ảnh cho đối tượng ImageView
         img.setImage(image);
         nameSong.setText(song.getNameSong());
@@ -69,17 +73,18 @@ public class SongItemController extends BottomClientController  implements Initi
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         chooseMusic();
+
     }
 
 
     public void chooseMusic() {
-
         songContainer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 //SongItemHome song = new SongItemHome(nameSong.getText(), nameAuthor.getText(), abum.getText(), dateCreated.getText(), totalTime.getText(), pathSong);
                 Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.X);
-                Song song = new Song(1,
+                Song song = new Song(songId,
                        nameSong.getText(),nameAuthor.getText(),dateCreated.getText(),
                         totalTime.getText(),
                         pathSong,pathImg,""

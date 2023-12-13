@@ -15,6 +15,7 @@ public class ListSongPlaying  {
 
     // Thêm bài hát vào danh sách
     public void addSong(Song song) {
+
         songs.add(0, song);
     }
 
@@ -58,6 +59,10 @@ public class ListSongPlaying  {
     }
 
     public class SongListGlobal {
+        public static ListSongPlaying songList = new ListSongPlaying();
+    }
+
+    public class SongListLiked {
         public static ListSongPlaying songList = new ListSongPlaying();
     }
 }

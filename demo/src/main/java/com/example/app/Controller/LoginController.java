@@ -24,11 +24,11 @@ public class LoginController implements Initializable {
     public PasswordField password_field;
     public TextField email_field;
 
-    private static User user; // Đặt làm biến toàn cục
+//    private static User user; // Đặt làm biến toàn cục
 
-    public static User getUser() {
-        return user;
-    }
+//    public static User getUser() {
+//        return user;
+//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -72,13 +72,14 @@ public class LoginController implements Initializable {
 
 
 
-                        //User user = new User(userName, userId, userEmail,userGender);
-                        user = new User();
-
-                        user.setUserName(userName);
-                        user.setUserEmail(userEmail);
-                        user.setUserGender(userGender);
-                        user.setUserId(userId);
+                        User user = new User(userName, userId, userEmail,userGender);
+                        Data.getDataGLobal.dataGlobal.setCurrentUser(user);
+//                        user = new User();
+//
+//                        user.setUserName(userName);
+//                        user.setUserEmail(userEmail);
+//                        user.setUserGender(userGender);
+//                        user.setUserId(userId);
                     }
                 }
             } catch (SQLException e) {
@@ -171,7 +172,7 @@ public class LoginController implements Initializable {
 
         try{
             Connection connection = ConnectDB.getConnection();
-            String query = "select * from playlist";
+            String query = "select * from playlist where authorId = 1";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
 

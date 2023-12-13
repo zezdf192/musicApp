@@ -18,10 +18,6 @@ public class Song {
 
     }
 
-    public int getSongId() {
-        return songId;
-    }
-
     public Song(int songId, String nameSong, String nameAuthor, String dateCreated, String totalLike, String pathSong, String pathImg, String kindOfSong) {
         this.songId = songId;
         this.nameSong = nameSong;
@@ -34,6 +30,11 @@ public class Song {
         this.kindOfSong = kindOfSong;
 
     }
+
+    public int getSongId() {
+        return songId;
+    }
+
 
     public String getNameSong() {
         return nameSong;
