@@ -27,8 +27,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
+
 import java.net.URL;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -48,13 +51,17 @@ public class PlaylistItemController implements Initializable {
     int quantitySong;
     String description;
 
+
+
     public void setData (PlaylistItem playlistItem) {
 
         // Tải ảnh từ đường dẫn
         Image image = new Image(playlistItem.getThumbnailPlaylist());
 
         // Đặt ảnh cho đối tượng ImageView
+
         img.setImage(image);
+
 
         namePlaylist.setText(playlistItem.getNamePlaylist());
         des_Playlist.setText(playlistItem.getDescription());
@@ -67,6 +74,8 @@ public class PlaylistItemController implements Initializable {
         quantitySong = playlistItem.getQuantitySong();
         description = playlistItem.getDescription();
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

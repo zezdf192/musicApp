@@ -2,6 +2,7 @@ package com.example.app.Controller.Client;
 
 import com.example.app.ConnectDB.ConnectDB;
 
+import com.example.app.Models.Model;
 import com.example.app.Models.Song.Song;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
+
+
 public class SearchController implements Initializable {
 
     public TextField text_search;
@@ -27,6 +30,7 @@ public class SearchController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("hihi");
         text_search.setText("");
         vbox.getChildren().clear();
 

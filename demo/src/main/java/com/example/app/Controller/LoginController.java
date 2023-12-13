@@ -24,11 +24,6 @@ public class LoginController implements Initializable {
     public PasswordField password_field;
     public TextField email_field;
 
-//    private static User user; // Đặt làm biến toàn cục
-
-//    public static User getUser() {
-//        return user;
-//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -97,8 +92,8 @@ public class LoginController implements Initializable {
                 showAlert("Thông báo", "Đăng nhập thành công!", Alert.AlertType.INFORMATION);
                 Stage stage = (Stage) login_btn.getScene().getWindow();
                 Model.getInstance().getViewFactory().closeStage(stage);
-//                Model.getInstance().getViewFactory().showClientWindow();
-                Model.getInstance().getViewAdminFactory().showAdminWindow();
+                Model.getInstance().getViewFactory().showClientWindow();
+                //Model.getInstance().getViewAdminFactory().showAdminWindow();
             } else {
                 showAlert("Lỗi", "Email hoặc mật khẩu không đúng!", Alert.AlertType.ERROR);
             }

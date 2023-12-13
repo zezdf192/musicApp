@@ -28,6 +28,9 @@ public class AdminController implements Initializable {
                 case ABUM:
                     admin_parent.setCenter(Model.getInstance().getViewAdminFactory().getManageAlbum());
                     break;
+                case PLAYLIST:
+                    admin_parent.setCenter(Model.getInstance().getViewAdminFactory().getManagePlaylist());
+                    break;
 
                 default:
 

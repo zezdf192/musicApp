@@ -5,5 +5,6 @@ public enum AdminMenuOptions {
     MANAGE_SONG,
     CHECK_SONG,
     ABUM,
-    PLAYLIST
+    PLAYLIST,
+    X
 }

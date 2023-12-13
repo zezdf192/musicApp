@@ -18,6 +18,7 @@ public class ViewAdminFactory {
     private AnchorPane manageUserSong;
 
     private AnchorPane manageAlbum;
+    private AnchorPane managePlaylist;
 
     public ViewAdminFactory() {
         this.adminSelectedMenuItem = new SimpleObjectProperty<>();
@@ -58,6 +59,17 @@ public class ViewAdminFactory {
             }
         }
         return manageAlbum;
+    }
+
+    public AnchorPane getManagePlaylist() {
+        if (managePlaylist == null) {
+            try {
+                managePlaylist = new FXMLLoader(getClass().getResource("/Fxml/Admin/ManagePlaylist/ManagePlaylist.fxml")).load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return managePlaylist;
     }
 
     public void showAdminWindow() {

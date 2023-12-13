@@ -23,6 +23,7 @@ public class AdminMenuController implements Initializable {
         manage_user.setOnAction(event -> manageUserView());
         manage_song.setOnAction(event -> manageSongView());
         abum.setOnAction(event -> manage_album());
+        playlist.setOnAction(event -> managePlaylistView());
     }
 
     private void manage_album() {
@@ -35,5 +36,12 @@ public class AdminMenuController implements Initializable {
 
     private void manageSongView() {
         Model.getInstance().getViewAdminFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.MANAGE_SONG);
+
+    }
+
+
+    private void managePlaylistView() {
+        Model.getInstance().getViewAdminFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.PLAYLIST);
+
     }
 }

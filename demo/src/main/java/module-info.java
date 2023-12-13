@@ -8,6 +8,7 @@ module com.example.demo {
     requires cloudinary.http44;
     requires com.microsoft.sqlserver.jdbc;
 
+
     opens com.example.app to javafx.fxml;
     exports com.example.app;
 
@@ -25,6 +26,7 @@ module com.example.demo {
     exports com.example.app.Controller.Admin.ManageUser;
     exports com.example.app.Controller.Admin.ManageSong;
     exports com.example.app.Controller.Admin.ManageAlbum;
+    exports com.example.app.Controller.Admin.ManagePlaylist;
     exports com.example.app.Models.Admin;
 
 }

@@ -3,6 +3,10 @@ package com.example.app.Controller.Admin.ManageAlbum;
 import com.example.app.ConnectDB.ConnectDB;
 import com.example.app.Controller.Data;
 import com.example.app.Models.Admin.ItemSong;
+import com.example.app.Models.Model;
+import com.example.app.Models.Song.ListSongPlaying;
+import com.example.app.Models.Song.Song;
+import com.example.app.Views.ClientMenuOptions;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +26,8 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
+
+import static com.example.app.Controller.Client.BottomClientController.mediaPlayer;
 
 public class ItemSongInAlbumController implements Initializable {
     private int songId;
@@ -52,7 +58,7 @@ public class ItemSongInAlbumController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        playMusic();
         remove.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -88,6 +94,39 @@ public class ItemSongInAlbumController implements Initializable {
         });
     }
 
+    private void playMusic() {
+        songContainer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                //SongItemHome song = new SongItemHome(nameSong.getText(), nameAuthor.getText(), abum.getText(), dateCreated.getText(), totalTime.getText(), pathSong);
+                Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.X);
+                Song song = new Song(songId,
+                        nameSong.getText(),nameAuthor.getText(),dateCreated.getText(),
+                        String.valueOf(totalLike),
+                        pathSong,pathImg,""
+                );
+
+                Data.getDataGLobal.dataGlobal.setCurrentSong(song);
+                if(mediaPlayer != null) {
+                    mediaPlayer.stop();
+                }
+
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/Fxml/Client/BottomClient.fxml"));
+
+                Parent viewBottomClient;
+                try {
+                    viewBottomClient = loader.load();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                borderPane.setBottom(viewBottomClient);
+            }
+        });
+    }
+
     public void setData(ItemSong song) {
         Image image = new Image(song.getPathImg());
         img.setImage(image);
@@ -105,6 +144,6 @@ public class ItemSongInAlbumController implements Initializable {
         albumId = Data.getDataGLobal.dataGlobal.getCurrentEditAlbum().getId();
         playlistId = song.getPlaylistId();
         desAdmin = song.getDesAdmin();
-        abum.setText(song.getNameSong());
+        abum.setText(Data.getDataGLobal.dataGlobal.getCurrentEditAlbum().getName());
     }
 }

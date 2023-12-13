@@ -1,10 +1,13 @@
 package com.example.app.Controller.Admin.ManageAlbum;
 
 import com.example.app.ConnectDB.ConnectDB;
+import com.example.app.Controller.Admin.ManagePlaylist.ItemSongInPlaylistController;
 import com.example.app.Controller.Data;
 import com.example.app.Models.Admin.ItemAlbum;
 import com.example.app.Models.Admin.ItemSong;
+import com.example.app.Models.Model;
 import com.example.app.Models.Song.Song;
+import com.example.app.Views.AdminMenuOptions;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,6 +38,7 @@ public class DefaultAlbumController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Model.getInstance().getViewAdminFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.X);
         album = Data.getDataGLobal.dataGlobal.getCurrentEditAlbum();
         header.setText(album.getName());
         albumId = album.getId();

@@ -34,7 +34,10 @@ import java.sql.*;
 import java.util.List;
 import java.util.ResourceBundle;
 
+
+
 public class CollectionController implements Initializable {
+
     public VBox song_liked;
     public HBox playlist_liked;
     //public VBox vbox;
@@ -47,13 +50,14 @@ public class CollectionController implements Initializable {
     }
 
     private void performInitialization() {
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.X);
+
+        //Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.X);
 
         // Get Data Current User
         User user = Data.getDataGLobal.dataGlobal.getCurrentUser();
         Integer userId = (user != null) ? user.getUserId() : null;
 
-        ListPlayList.ListPlaylistCurrentUser.songList.getListPlaylist_Item().clear();
+        //ListPlayList.ListPlaylistCurrentUser.songList.getListPlaylist_Item().clear();
 
         getDataLikedPlaylist(userId);
         getLikedSongFromData(userId);
@@ -77,7 +81,7 @@ public class CollectionController implements Initializable {
     }
 
     private void updateUI(List<PlaylistItem> listPlaylist) {
-        playlist_liked.getChildren().clear();
+        //playlist_liked.getChildren().clear();
         for (PlaylistItem playlistItem : listPlaylist) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/Fxml/Client/PlaylistView/PlaylistItem.fxml"));
@@ -87,10 +91,12 @@ public class CollectionController implements Initializable {
                 PlaylistItemController cic = fxmlLoader.getController();
                 cic.setData(playlistItem);
                 playlist_liked.getChildren().add(hBox);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
     }
 
     private List<PlaylistItem> processResultSet(ResultSet resultSet) throws SQLException {

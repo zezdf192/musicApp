@@ -41,7 +41,7 @@ public class ClientMenuController implements Initializable {
 
 
     private void onSearch(ActionEvent event) {
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.SEARCH);
+        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.X);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
 
@@ -59,7 +59,7 @@ public class ClientMenuController implements Initializable {
     }
 
     private void onCollection(ActionEvent event) {
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.COLLECTION);
+        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.X);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         BorderPane borderPane = (BorderPane) stage.getScene().getRoot();
 
